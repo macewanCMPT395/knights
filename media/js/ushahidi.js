@@ -55,6 +55,8 @@
 		KML: "KML",
 
 		DEFAULT: "default",
+	     
+	        HEATMAP: "heatmap",
 
 		/**
 		 * APIProperty: baseURL
@@ -538,6 +540,36 @@
 
 			return this;
 		}
+	    if(layerType == Ushahidi.HEATMAP){
+			var ushahidiData={
+					max: 2,
+					data: Ushahidi.heatmapData
+				};
+
+				var transformedUshahidiData = { max: ushahidiData.max , data: [] },
+					data = ushahidiData.data,
+					datalen = data.length,
+					nudata = [];
+
+				// in order to use the OpenLayers Heatmap Layer we have to transform our data into 
+				// { max: <max>, data: [{lonlat: <OpenLayers.LonLat>, count: <count>},...]}
+
+				while(datalen--){
+					nudata.push({
+						lonlat: new OpenLayers.LonLat(data[datalen].lon, data[datalen].lat),
+						count: data[datalen].count
+					});
+				}
+
+				transformedUshahidiData.data = nudata;
+		var layer = new OpenLayers.Layer.OSM();
+		var heatmapLayer = new OpenLayers.Layer.Heatmap(options.name,this._olMap, layer, {visible: true, radius:10}, {isBaseLayer: false, opacity: 0.3, projection: new OpenLayers.Projection("EPSG:4326")});
+		this._olMap.addLayers([layer, heatmapLayer]);
+		this._olMap.zoomToMaxExtent();
+		heatmapLayer.setDataSet(transformedUshahidiData);
+		this._isLoaded = 1;
+		return this;
+	    }
 		
 		// Setup default protocol format
 		var protocolFormat = new OpenLayers.Format.GeoJSON();

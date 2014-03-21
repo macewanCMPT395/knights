@@ -22,6 +22,7 @@ Ushahidi.markerRadius = <?php echo $marker_radius; ?>;
 Ushahidi.markerOpacity = <?php echo $marker_opacity; ?>;
 Ushahidi.markerStokeWidth = <?php echo $marker_stroke_width; ?>;
 Ushahidi.markerStrokeOpacity = <?php echo $marker_stroke_opacity; ?>;
+Ushahidi.heatmapData = <?php echo $data_array; ?>;
 
 // Default to most active month
 var startTime = <?php echo $active_startDate ?>;
@@ -211,6 +212,7 @@ jQuery(function() {
 		transform: false
 	}, true, true);
 
+    map.addLayer(Ushahidi.HEATMAP, {name: "Heatmap"}, true, true);
 
 	// Register the referesh timeline function as a callback
 	map.register("filterschanged", refreshTimeline);
