@@ -54,9 +54,13 @@ class Main_Controller extends Template_Controller {
 	 */
 	protected $themes;
 
+	public $data_array;
+
 	public function __construct()
 	{
 		parent::__construct();
+		
+		$this->data_array = $this->_data();
 
 		// Load Session
 		$this->session = Session::instance();
@@ -135,7 +139,6 @@ class Main_Controller extends Template_Controller {
 			$this->template->header->header_nav->loggedin_user = Auth::instance()->get_user();
 		}
 		$this->template->header->header_nav->site_name = Kohana::config('settings.site_name');
-		
 		Event::add('ushahidi_filter.view_pre_render.layout', array($this, '_pre_render'));
 	}
 
@@ -449,6 +452,7 @@ class Main_Controller extends Template_Controller {
 		$this->themes->js->active_endDate = $display_endDate;
 
 		$this->themes->js->blocks_per_row = Kohana::config('settings.blocks_per_row');
+		$this->themes->js->data_array = $this->_data();
 	}
 	
 	/**
@@ -462,6 +466,43 @@ class Main_Controller extends Template_Controller {
 		$this->themes->plugin_requirements();
 		$this->template->header->header_block = $this->themes->header_block();
 		$this->template->footer->footer_block = $this->themes->footer_block();
+	}
+	private function _data()
+	{
+		$data = array();
+		$markers = reports::fetch_incidents();
+		
+		foreach ($markers as $marker)
+		{
+			$skip = FALSE;
+			// To generate a good heatmap we need to combine lat/lons
+			// at 3 decimal place values
+			$marker->latitude = round($marker->latitude, 3);
+			$marker->longitude = round($marker->longitude, 3);
+
+			// Find item with similar lat/lon?
+			foreach ($data as $key => $value)
+			{
+				if ($data[$key]['lat'] == $marker->latitude 
+					AND $data[$key]['lon'] == $marker->longitude)
+				{
+					$data[$key]['count'] = $data[$key]['count'] + 1;
+					$skip = TRUE;
+					break 1;
+				}
+			}
+
+			if ( ! $skip)
+			{
+				$data[] = array(
+					'lat' => round($marker->latitude, 3),
+					'lon' => round($marker->longitude, 3),
+					'count' => 1
+					);
+			}
+		}
+
+		return json_encode($data);
 	}
 
 } // End Main
