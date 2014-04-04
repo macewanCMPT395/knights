@@ -561,12 +561,13 @@
 					});
 				}
 
-				transformedUshahidiData.data = nudata;
-		var layer = new OpenLayers.Layer.OSM();
-		var heatmapLayer = new OpenLayers.Layer.Heatmap(options.name,this._olMap, layer, {visible: true, radius:10}, {isBaseLayer: false, opacity: 0.3, projection: new OpenLayers.Projection("EPSG:4326")});
-		this._olMap.addLayers([layer, heatmapLayer]);
-		this._olMap.zoomToMaxExtent();
-		heatmapLayer.setDataSet(transformedUshahidiData);
+		transformedUshahidiData.data = nudata;
+	
+		var heatmapLayer = new OpenLayers.Layer.Heatmap(options.name,this._olMap, this._olMap.layers[0], {visible: true, radius:10}, {isBaseLayer: false, opacity: 0.3, projection: new OpenLayers.Projection("EPSG:4326")});
+		var vectorLayer = new OpenLayers.Layer.Vector(options.name, heatmapLayer);
+		this._olMap.addLayer(vectorLayer);
+		
+		vectorLayer.setDataSet(transformedUshahidiData);
 		this._isLoaded = 1;
 		return this;
 	    }
