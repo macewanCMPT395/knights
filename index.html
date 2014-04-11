@@ -1,59 +1,70 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Knights : We are the Knights who say Ni!" />
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>Knights</title>
+    <title>Knights by macewanCMPT395</title>
   </head>
 
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/macewanCMPT395/knights">View on GitHub</a>
+    <header>
+      <div class="container">
+        <h1>Knights</h1>
+        <h2>We are the Knights who say Ni!</h2>
 
-          <h1 id="project_title">Knights</h1>
-          <h2 id="project_tagline">We are the Knights who say Ni!</h2>
+        <section id="downloads">
+          <a href="https://github.com/macewanCMPT395/knights/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/macewanCMPT395/knights/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/macewanCMPT395/knights" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/macewanCMPT395/knights/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/macewanCMPT395/knights/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+    <div class="container">
+      <section id="main_content">
+        <p>GETTING STARTED:</p>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>This project was an attempt to get dkobia's heatmap plugin to work with the main page map. It was done as a school project for CMPT 395 at MacEwan University, and was carried out by Katie Thompson, Shaun Yonkers, and Jordan Dykstra.
-<img src="http://imgur.com/tHhrvmL" alt=""></p>
+<p>This project was an attempt to get dkobia's heatmap plugin to work with the main page map. It was done as a school project for CMPT 395 at MacEwan University, and was carried out by Katie Thompson, Shaun Yonkers, and Jordan Dykstra.</p>
+
+<p><img src="http://imgur.com/tHhrvmL" alt=""></p>
+
+<p>The existing heatmap plugin - though useful - works by loading a separate page with a new map and heatmap. We wanted the user to be able to see the heatmap in a similar interface to the way the reports our shown. With our heatmap, the user can also view the heatmap and reports at the same time, which is not possible with the existing heatmap plugin.</p>
+
+<p>Installation:</p>
+
+<p>For existing Ushahidi installations:</p>
+
+<ul>
+<li>Replace the default ushahidi.js in media/js with the one from this project.</li>
+<li>Replace the default main_js.php in themes/default/views/main with the one from this project.</li>
+<li>Replace the default main.php in application/controllers with the one from this project.</li>
+<li>Change the permissions for your installation to whatever allows it to function on your machine, in our case 755.</li>
+</ul><p>For new Ushahidi installations:</p>
+
+<ul>
+<li>This project contains the entire default codebase for Ushahidi, so cloning the repository would be a functioning installation.</li>
+</ul><p>DEVELOPERS:</p>
+
+<p>Repo:
+<a href="https://github.com/macewanCMPT395/knights">https://github.com/macewanCMPT395/knights</a></p>
 
 <p>WHAT WE DID:
-We added a heatmap layer type to ushahidi.js and modified main_js.php in the default theme to create and use it. As the heatmap requires the data to be modified from the standard data, we used the data manipulation from dkobia's heatmap to do so. We generated the map as a layer and used this to create a vector layer, which allowed the heatmap to toggle on and off, as it wouldn't do so as a non-vector layer.</p>
+We added a heatmap layer type to ushahidi.js, the heatmap controller code from dkobia's plugin to the main controller, and modified main_js.php in the default theme to create and use it. As the heatmap requires the data to be modified from the standard data, we used the data manipulation from dkobia's heatmap to do so. We generated the map as a layer and used this to create a vector layer, which allowed the heatmap to toggle on and off, as it wouldn't do so as a non-vector layer.</p>
 
-<p>WHY WE DID IT:
-The existing heatmap plugin - though useful - works by loading a separate page with a new map and heatmap. We wanted the user to be able to see the heatmap in a similar interface to the way the reports our shown. With our heatmap, the user can also view the heatmap and reports at the same time, which is not possible with the existing heatmap plugin.</p>
+<p>FUTURE PLANS:
+Category selection and associated redrawing would be the optimum </p>
 
 <p>POSSIBLE ADDITIONS:
 Making this a plugin on its own, making this a separate theme, and general streamlining, fixes, and new features would be great projects using this code.</p>
       </section>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Knights maintained by <a href="https://github.com/macewanCMPT395">macewanCMPT395</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
     
-
   </body>
 </html>
