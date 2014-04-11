@@ -28,6 +28,8 @@
 				</strong>
 			</div>
 
+
+			   		
 			<ul id="category_switch" class="category-filters">
 				<?php
 				$color_css = 'class="category-icon swatch" style="background-color:#'.$default_map_all.'"';
@@ -246,6 +248,15 @@
 					?>
 				</div>
 				<!-- / filters -->
+				
+				 
+				<button onclick="myFunction()">Heatmap Help</button>
+				<script>
+				  function myFunction(){
+				  alert("To turn on the heatmap, click the layers tab on the top right corner of the map.");
+				}
+</script>
+  
 
 				<?php								
 				// Map and Timeline Blocks
